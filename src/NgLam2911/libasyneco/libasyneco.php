@@ -25,6 +25,9 @@ class libasyneco {
 		if (!isset(self::$providers[$provider])){
 			throw new InvalidProviderException();
 		}
+		if(!self::$providers[$provider]->isCompatible()){
+			throw new DependencyMissingException();
+		}
 		return self::$providers[$provider];
 	}
 
