@@ -14,7 +14,7 @@ try{
 }catch(InvalidProviderException){
   //Invalid Provider
 }catch(DependencyMissingException){
-  //Mising virion dependency
+  //Mising libasyneco's dependency
 }
 ```
 
