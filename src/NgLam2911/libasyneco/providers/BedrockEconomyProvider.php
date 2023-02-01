@@ -14,7 +14,7 @@ class BedrockEconomyProvider implements EcoProvider{
 
 	public function myMoney(Player|string $player) : Generator{
 		if($player instanceof Player) $player = $player->getName();
-		return Await::promise(function($resolve, $reject) use ($player){
+		return yield from Await::promise(function($resolve, $reject) use ($player){
 			BedrockEconomyAPI::legacy()->getPlayerBalance($player, ClosureContext::create(function(?int $balance) use ($resolve, $reject){
 				if($balance === null) $reject(new EcoException());
 				else $resolve($balance);
@@ -24,7 +24,7 @@ class BedrockEconomyProvider implements EcoProvider{
 
 	public function addMoney(Player|string $player, float $amount) : Generator{
 		if($player instanceof Player) $player = $player->getName();
-		return Await::promise(function($resolve, $reject) use ($player, $amount){
+		yield from Await::promise(function($resolve, $reject) use ($player, $amount){
 			BedrockEconomyAPI::legacy()->addToPlayerBalance($player, (int) $amount, ClosureContext::create(function(bool $wasUpdated) use ($resolve, $reject){
 				if(!$wasUpdated) $reject(new EcoException());
 				else $resolve();
@@ -34,7 +34,7 @@ class BedrockEconomyProvider implements EcoProvider{
 
 	public function takeMoney(Player|string $player, float $amount) : Generator{
 		if($player instanceof Player) $player = $player->getName();
-		return Await::promise(function($resolve, $reject) use ($player, $amount){
+		yield from Await::promise(function($resolve, $reject) use ($player, $amount){
 			BedrockEconomyAPI::legacy()->subtractFromPlayerBalance($player, (int) $amount, ClosureContext::create(function(bool $wasUpdated) use ($resolve, $reject){
 				if(!$wasUpdated) $reject(new EcoException());
 				else $resolve();
@@ -44,7 +44,7 @@ class BedrockEconomyProvider implements EcoProvider{
 
 	public function setMoney(Player|string $player, float $amount) : Generator{
 		if($player instanceof Player) $player = $player->getName();
-		return Await::promise(function($resolve, $reject) use ($player, $amount){
+		yield from Await::promise(function($resolve, $reject) use ($player, $amount){
 			BedrockEconomyAPI::legacy()->setPlayerBalance($player, (int) $amount, ClosureContext::create(function(bool $wasUpdated) use ($resolve, $reject){
 				if(!$wasUpdated) $reject(new EcoException());
 				else $resolve();
