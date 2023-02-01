@@ -17,7 +17,8 @@ class EconomySProvider implements EcoProvider{
 		if ($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->myMoney($player);
 		if ($result === false) throw new EcoException();
-		return yield $result;
+		0 && yield; //this is just a hacks for a function that doesn't yield anything at all...
+		return $result;
 	}
 
 	/**
@@ -27,7 +28,7 @@ class EconomySProvider implements EcoProvider{
 		if($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->addMoney($player, $amount);
 		if ($result !== EconomyAPI::RET_SUCCESS) throw new EcoException();
-		yield;
+		0 && yield;
 	}
 
 	/**
@@ -37,7 +38,7 @@ class EconomySProvider implements EcoProvider{
 		if($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->reduceMoney($player, $amount);
 		if ($result !== EconomyAPI::RET_SUCCESS) throw new EcoException();
-		yield;
+		0 && yield;
 	}
 
 	/**
@@ -47,7 +48,7 @@ class EconomySProvider implements EcoProvider{
 		if($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->setMoney($player, $amount);
 		if ($result !== EconomyAPI::RET_SUCCESS) throw new EcoException();
-		yield;
+		0 && yield;
 	}
 
 	public function isCompatible() : bool{
