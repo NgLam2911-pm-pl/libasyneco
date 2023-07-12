@@ -10,9 +10,6 @@ use pocketmine\player\Player;
 
 class EconomySProvider implements EcoProvider{
 
-	/**
-	 * @throws EcoException
-	 */
 	public function myMoney(Player|string $player) : Generator{
 		if ($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->myMoney($player);
@@ -21,9 +18,6 @@ class EconomySProvider implements EcoProvider{
 		return $result;
 	}
 
-	/**
-	 * @throws EcoException
-	 */
 	public function addMoney(Player|string $player, float $amount) : Generator{
 		if($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->addMoney($player, $amount);
@@ -31,9 +25,6 @@ class EconomySProvider implements EcoProvider{
 		0 && yield;
 	}
 
-	/**
-	 * @throws EcoException
-	 */
 	public function takeMoney(Player|string $player, float $amount) : Generator{
 		if($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->reduceMoney($player, $amount);
@@ -41,9 +32,6 @@ class EconomySProvider implements EcoProvider{
 		0 && yield;
 	}
 
-	/**
-	 * @throws EcoException
-	 */
 	public function setMoney(Player|string $player, float $amount) : Generator{
 		if($player instanceof Player) $player = $player->getName();
 		$result = EconomyAPI::getInstance()->setMoney($player, $amount);
